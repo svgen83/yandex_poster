@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from places.models import Agency
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 
 
 def show_location(request, place_id):
@@ -14,10 +14,10 @@ def show_location(request, place_id):
        "coordinates": {
           "lat": location.latitude,
           "lon": location.longitude},
-       "images": []}
+       "imgs": []}
     
     for title in location.agency_titles.all():
-        data["images"].append(title.image.url)        
+        data["imgs"].append(title.image.url)        
 
     return JsonResponse(data, json_dumps_params={
             'ensure_ascii': False,
