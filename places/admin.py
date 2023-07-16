@@ -1,11 +1,12 @@
 from django.contrib import admin
 from .models import Agency, Picture
 from django.utils.safestring import mark_safe
+from adminsortable2.admin import SortableInlineAdminMixin
 
 
 # Register your models here.
 
-class PictureInline(admin.TabularInline):
+class PictureInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Picture
     readonly_fields = ['headshot_image']
     
@@ -22,7 +23,7 @@ class AgencyAdmin(admin.ModelAdmin):
 @admin.register(Picture)
 class PictureAdmin(admin.ModelAdmin):
     readonly_fields = ['headshot_image']
-    fields = ('number', 'agency_title', 'headshot_image')
+    fields = ('agency_title', 'headshot_image')
 
     def headshot_image(self, obj):
         return mark_safe(f'<img src="{obj.image.url}" style="max-height: 200px;>')
