@@ -1,10 +1,11 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 # Create your models here.
 class Agency(models.Model):
     title = models.CharField('Название организации', max_length=200)
     description_short = models.TextField('Краткое описание')
-    description_long = models.TextField('Подробное описание')
+    description_long = HTMLField('Подробное описание')
     latitude = models.FloatField(null=True, blank=True,
                                  verbose_name='широта')
     longitude = models.FloatField(null=True, blank=True,

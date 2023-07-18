@@ -16,12 +16,14 @@ def index(request):
           "properties": {
             "title": place.title,
             "placeId": place.pk,
-            "detailsUrl": reverse("location_urls", kwargs = {'place_id': place.id})
+            "detailsUrl": reverse("location_urls",
+                                  kwargs = {'place_id': place.id})
             }}
          )
             
-   context = {"places_geojson": {"type":"FeatureCollection",
-                       "features": features}}
+   context = {"places_geojson": {
+      "type":"FeatureCollection",
+      "features": features}}
       
    return render(request, "index.html", context)
    
