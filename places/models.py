@@ -12,15 +12,17 @@ class Agency(models.Model):
     class Meta:
         verbose_name = 'Агенство по туризму'
         verbose_name_plural = 'Агенства по туризму'
+        ordering = ['pk']
 
     def __str__(self):
         return self.title
 
 
 class Picture(models.Model):
-    number = models.IntegerField('Номер изображения', db_index=True)
+    number = models.IntegerField('Номер изображения',
+                                 db_index=True, default=0)
     image = models.ImageField(verbose_name='Фотография',
-                               db_index=True)
+                              db_index=True)
     agency_title = models.ForeignKey(
         Agency,
         on_delete=models.CASCADE,
@@ -32,6 +34,7 @@ class Picture(models.Model):
     class Meta:
         verbose_name = 'Фотография достопримечательности'
         verbose_name_plural = 'Фотографии достопримечательности'
+        ordering = ['number']
 
     def __str__(self):
         return f'{self.number} {self.agency_title.title}'
