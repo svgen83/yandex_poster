@@ -1,6 +1,7 @@
-﻿# Website about agencies organizing walks in interesting places in Moscow
+# Website about agencies organizing walks in interesting places in Moscow
 
 The site is an interactive map of Moscow, which displays types of outdoor activities with detailed descriptions and comments.
+The published version of the site can be viewed at [https://svg40.pythonanywhere.com](https:/svg40.pythonanywhere.com)
 
 ## Run
 
@@ -24,16 +25,37 @@ Start the development server
 python3 manage.py runserver
 ```
 
+### Filling with content from an existing file:
+  - create a file in *.json format
+
+<i>example of compiling *.json file:</i>
+```json
+{
+     "title": "Location name",
+     "imgs": [
+         "https://link_to_image1/image.jpg",
+         "https://link_to_image2/image.jpg"
+     ],
+     "description_short": "Short description of the place",
+     "description_long": "<p>Long description, tagged</p>",
+     coordinates: {
+         "lng": "37.797137", longitude
+         "lat": "55.480924" latitude
+     }
+}
+```
+  - upload it online on [Github](https://github.com)
+  - enter a command with a link to the file
+```
+python manage.py load_place https://raw.githubusercontent.com/link/filename.json
+```
+
+<i>Execution example:</i>
+```
+(PRG) C:\....>python manage.py load_place https://filename.json
+WARNING:root:Created new object 'ObjectName'
+WARNING:root:Images loaded
+```
 ## Environment variables
 
 Part of the project settings is taken from the environment variables. To define them, create a `.env` file next to `manage.py` and write data there in the following format: `VARIABLE=value`.
-
-There are 3 variables available:
-- `DEBUG` - debug mode. Set to `True` to see debug information in case of an error.
-- `SECRET_KEY` — project secret key
-- `ALLOWED_HOSTS` - see [Django documentation](https://docs.djangoproject.com/en/3.1/ref/settings/#allowed-hosts)
-
-
-## Project Goals
-
-The code is written for educational purposes - for the course on Python and web development on the [Devman] site (https://dvmn.org).
