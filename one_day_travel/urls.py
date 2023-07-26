@@ -1,4 +1,4 @@
-"""mysite URL Configuration
+"""one_day_travel URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -20,7 +20,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 from django.conf.urls.static import static
 
-from mysite import views
+from one_day_travel import views
 from places.views import show_location
 
 
