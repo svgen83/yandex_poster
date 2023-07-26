@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from adminsortable2.admin import SortableInlineAdminMixin
 
-from .models import Agency, Picture
+from .models import Place, Picture
 
 
 # Register your models here.
@@ -20,8 +20,8 @@ class PictureInline(SortableInlineAdminMixin, admin.TabularInline):
     headshot_image.short_description = 'Preview'
 
 
-@admin.register(Agency)
-class AgencyAdmin(admin.ModelAdmin):
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
     inlines = [PictureInline]
 
 

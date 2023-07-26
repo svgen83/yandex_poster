@@ -2,7 +2,7 @@ from django.db import models
 from tinymce.models import HTMLField
 
 # Create your models here.
-class Agency(models.Model):
+class Place(models.Model):
     title = models.CharField('Название организации', max_length=200)
     description_short = models.TextField('Краткое описание')
     description_long = HTMLField('Подробное описание')
@@ -24,13 +24,13 @@ class Picture(models.Model):
                                  db_index=True, default=0)
     image = models.ImageField(verbose_name='Фотография',
                               db_index=True)
-    agency_title = models.ForeignKey(
-        Agency,
+    place_title = models.ForeignKey(
+        Place,
         on_delete=models.CASCADE,
         null=True,
         blank=True,
         verbose_name='Название бюро',
-        related_name='agency_titles')
+        related_name='place_images')
         
     class Meta:
         verbose_name = 'Фотография достопримечательности'
@@ -38,4 +38,4 @@ class Picture(models.Model):
         ordering = ['number']
 
     def __str__(self):
-        return f'{self.number} {self.agency_title.title}'
+        return f'{self.number} {self.place_title.title}'

@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from places.models import Agency
+from places.models import Place
 from django.urls import reverse
 
 
 def index(request):
-   places = Agency.objects.all()
+   places = Place.objects.all()
    features = []
    
    for place in places:
