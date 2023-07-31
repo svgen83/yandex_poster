@@ -5,19 +5,16 @@ from django.http import JsonResponse
 
 def show_location(request, place_id):
    
-    location = get_object_or_404(Place, pk=place_id)
+    locations = get_object_or_404(Place, pk=place_id)
     
     place_description = {
-       "title": location.title,
-       "description_short": location.description_short,
-       "description_long": location.description_long,
+       "title": locations.title,
+       "description_short": locations.description_short,
+       "description_long": locations.description_long,
        "coordinates": {
-          "lat": location.latitude,
-          "lon": location.longitude},
-       "imgs": []}
-    
-    for title in location.sight_images.all():
-        place_description["imgs"].append(title.image.url)        
+          "lat": locations.latitude,
+          "lon": locations.longitude},
+       "imgs": [title.image.url for title in locations.sight_images.all()]}        
 
     return JsonResponse(place_description,
                         json_dumps_params={

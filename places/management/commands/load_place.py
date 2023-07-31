@@ -31,7 +31,7 @@ def get_images(img_urls, place):
         image_content = ContentFile(response.content, name=image_name)
         Picture.objects.create(
             image=image_content,
-            agency_title=place,
+            sight=place,
             number=index)
     logging.warning('Картинки загружены')
 

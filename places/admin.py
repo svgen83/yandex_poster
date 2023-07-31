@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from adminsortable2.admin import SortableInlineAdminMixin
 
 from .models import Place, Picture
@@ -15,7 +16,8 @@ class PictureInline(SortableInlineAdminMixin, admin.TabularInline):
     fields = ['image', 'headshot_image']
     
     def headshot_image(self, obj):
-        return mark_safe(f'<img src="{obj.image.url}" style="max-height: 200px;>')    
+        return format_html('<img src="{}" style="max-height: {height}px";>',
+                           mark_safe(obj.image.url),height=200)    
 
     headshot_image.short_description = 'Preview'
 
