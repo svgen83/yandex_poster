@@ -7,7 +7,7 @@ def show_location(request, place_id):
    
     location = get_object_or_404(Place, pk=place_id)
     
-    data = {
+    place_description = {
        "title": location.title,
        "description_short": location.description_short,
        "description_long": location.description_long,
@@ -16,9 +16,10 @@ def show_location(request, place_id):
           "lon": location.longitude},
        "imgs": []}
     
-    for title in location.place_images.all():
-        data["imgs"].append(title.image.url)        
+    for title in location.agency_titles.all():
+        place_description["imgs"].append(title.image.url)        
 
-    return JsonResponse(data, json_dumps_params={
-            'ensure_ascii': False,
-            'indent': 2})
+    return JsonResponse(place_description,
+                        json_dumps_params={
+                            'ensure_ascii': False,
+                            'indent': 2})

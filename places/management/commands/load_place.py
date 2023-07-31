@@ -3,11 +3,11 @@ import requests
 
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
-from places.models import Agency, Picture
+from places.models import Place, Picture
 
 
 def get_or_create_content(place_description):
-    place, created = Agency.objects.get_or_create(
+    place, created = Place.objects.get_or_create(
         title=place_description['title'],
         description_short=place_description['description_short'],
         description_long=place_description['description_long'],
@@ -29,9 +29,10 @@ def get_images(img_urls, place):
         response = requests.get(img_url)
         response.raise_for_status()
         image_content = ContentFile(response.content, name=image_name)
-        Picture.objects.create(image=image_content,
-                             agency_title=place,
-                             number=index)
+        Picture.objects.create(
+            image=image_content,
+            agency_title=place,
+            number=index)
     logging.warning('Картинки загружены')
 
 
