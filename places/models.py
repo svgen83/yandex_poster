@@ -19,16 +19,16 @@ class Place(models.Model):
 
 class Picture(models.Model):
     number = models.IntegerField('Номер изображения',
-                                 db_index=True, default=0)
+                                 db_index=True,
+                                 blank=True, null=True,
+                                 default=0)
     image = models.ImageField(verbose_name='Фотография',
                               db_index=True)
-    agency_title = models.ForeignKey(
+    sight = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name='Название бюро',
-        related_name='agency_titles')
+        verbose_name='Название места',
+        related_name='sight_images')
         
     class Meta:
         verbose_name = 'Фотография достопримечательности'
@@ -36,4 +36,4 @@ class Picture(models.Model):
         ordering = ['number']
 
     def __str__(self):
-        return f'{self.number} {self.agency_title.title}'
+        return f'{self.number} {self.sight.title}'

@@ -16,7 +16,7 @@ def show_location(request, place_id):
           "lon": location.longitude},
        "imgs": []}
     
-    for title in location.agency_titles.all():
+    for title in location.sight_images.all():
         place_description["imgs"].append(title.image.url)        
 
     return JsonResponse(place_description,
