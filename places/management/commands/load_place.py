@@ -34,17 +34,18 @@ class Command(BaseCommand):
         place_description = response.json()
         place_title, created = Place.objects.get_or_create(
             title=place_description['title'],
-            description_short=place_description['description_short'],
-            description_long=place_description['description_long'],
             latitude=place_description['coordinates']['lat'],
-            longitude=place_description['coordinates']['lng'])
+            longitude=place_description['coordinates']['lng'],
+            defaults={
+                'description_short': place_description['description_short'],
+                'description_long': place_description['description_long']})
         if created:
-            logging.warning(f'Создан новый объект "{place_description["title"]}"')
+            logging.warning(
+                f'Создан новый объект "{place_description["title"]}"')
             for index, img_url in enumerate(place_description['imgs']):
                 image_content = download_image_content(index, img_url)
                 upload_image(image_content, place_title)
             logging.warning('Картинки загружены')
-            
 
     def add_arguments(self, parser):
         parser.add_argument('url', type=str, help='json url')
