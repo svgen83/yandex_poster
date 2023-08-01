@@ -14,10 +14,10 @@ class PictureInline(SortableInlineAdminMixin, admin.TabularInline):
     ordering = ['number']
     extra = 1
     fields = ['image', 'headshot_image']
-    
+
     def headshot_image(self, obj):
         return format_html('<img src="{}" style="max-height: {height}px";>',
-                           mark_safe(obj.image.url),height=200)    
+                           mark_safe(obj.image.url), height=200)
 
     headshot_image.short_description = 'Preview'
 

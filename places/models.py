@@ -8,6 +8,7 @@ class Place(models.Model):
     description_long = HTMLField('Подробное описание', blank=True)
     latitude = models.FloatField(verbose_name='широта')
     longitude = models.FloatField(verbose_name='долгота')
+
     class Meta:
         verbose_name = 'Интересное место'
         verbose_name_plural = 'Интересные места'
@@ -20,20 +21,19 @@ class Place(models.Model):
 class Picture(models.Model):
     number = models.IntegerField('Номер изображения',
                                  db_index=True,
-                                 blank=True, null=True,
-                                 default=0)
+                                 blank=True, null=True)
     image = models.ImageField(verbose_name='Фотография',
                               db_index=True)
-    sight = models.ForeignKey(
+    place = models.ForeignKey(
         Place,
         on_delete=models.CASCADE,
-        verbose_name='Название места',
-        related_name='sight_images')
-        
+        verbose_name='Достопримечательность',
+        related_name='place_images')
+
     class Meta:
         verbose_name = 'Фотография достопримечательности'
         verbose_name_plural = 'Фотографии достопримечательности'
         ordering = ['number']
 
     def __str__(self):
-        return f'{self.number} {self.sight.title}'
+        return f'{self.number} {self.place.title}'
