@@ -14,7 +14,7 @@ def show_location(request, place_id):
        "coordinates": {
           "lat": locations.latitude,
           "lon": locations.longitude},
-       "imgs": [title.image.url for title in locations.place_images.all()]}
+       "imgs": [title.image.url for title in locations.images.all()]}
 
     return JsonResponse(place_description,
                         json_dumps_params={

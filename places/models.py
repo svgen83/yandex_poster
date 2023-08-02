@@ -28,7 +28,7 @@ class Picture(models.Model):
         Place,
         on_delete=models.CASCADE,
         verbose_name='Достопримечательность',
-        related_name='place_images')
+        related_name='images')
 
     class Meta:
         verbose_name = 'Фотография достопримечательности'
